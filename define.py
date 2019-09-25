@@ -1,4 +1,4 @@
-'''
+﻿'''
 File for storing important and often used packages, lists, dicts, etc.
 '''
 
@@ -34,7 +34,8 @@ fuel_translation_de_en = {
     'Biomasse': 'Biomass plant',
     'Sonstige 1)': 'Geothermal plant',
     'Sonstige Erneuerbare': 'Geothermal plant',
-    'Sonstige Konventionelle': 'Oil plant'}
+    'Sonstige Konventionelle': 'Oil plant',
+    'Sonstige Energieträger': 'Other plant'}
 
 # Dict to translate shorten state names to full state names
 states_translation_sh_lo = {
@@ -96,7 +97,37 @@ coordinates_states_en = {
     'Saxony-Anhalt': (52.0090, 11.7026),
     'Schleswig-Holstein': (54.1855, 9.8222),
     'Thuringia': (50.9033, 11.0263),
-    'Offshore': (54.7436, 12.6453)}
+    'Offshore': (54.7436, 12.6453),
+    'Lower Bavaria': (48.6588, 12.8783),
+    'Lower Franconia': (50.0477, 9.9036),
+    'Middle Franconia': (49.4113, 10.8190),
+    'Swabia': (48.2231, 10.5089),
+    'Upper Bavaria': (48.0613, 11.8770),
+    'Upper Palatinate': (49.4634, 12.1486),
+    'Upper Franconia': (50.0803, 11.3934)}
+
+# Dict of position in plot of the geographical center of each state, 
+# except Brandenburg (would be Berlin also) in English	
+cap_positions_en = {
+    'Baden-Württemberg': [0.27, 0.15, 0.15, 0.15],
+    'Bavaria': [0.52, 0.2, 0.15, 0.15],
+    'Berlin': [0.75, 0.68, 0.15, 0.15],
+    'Brandenburg': [0.75, 0.6, 0.15, 0.15],
+    'Bremen': [0.25, 0.75, 0.15, 0.15],
+    'Hamburg': [0.32, 0.8, 0.15, 0.15],
+    'Hesse': [0.25, 0.4, 0.15, 0.15],
+    'Mecklenburg-Vorpommern': [0.6, 0.8, 0.15, 0.15],
+    'Lower Saxony': [0.35, 0.65, 0.15, 0.15],
+    'North Rhine-Westphalia': [0.15, 0.5, 0.15, 0.15],
+    'Rhineland-Palatinate': [0.14, 0.33, 0.15, 0.15],
+    'Saarland': [0.1, 0.25, 0.15, 0.15],
+    'Saxony': [0.68, 0.47, 0.15, 0.15],
+    'Saxony-Anhalt': [0.53, 0.58, 0.15, 0.15],
+    'Schleswig-Holstein': [0.4, 0.83, 0.15, 0.15],
+    'Thuringia': [0.47, 0.44, 0.15, 0.15],
+    'Offshore': [0.5, 0.92, 0.15, 0.15]
+}
+
 	
 # Dict for azimuth of solar panels                   
 azimuth = {
@@ -138,6 +169,11 @@ states_en = ['Baden-Württemberg', 'Bavaria', 'Berlin', 'Brandenburg',
              'Lower Saxony', 'North Rhine-Westphalia', 'Rhineland-Palatinate',
              'Saarland', 'Saxony-Anhalt', 'Saxony', 'Schleswig-Holstein',
              'Thuringia', 'Offshore']
+             
+#List of regions of Bavaria in English
+regions_by_en = ['Lower Bavaria', 'Lower Franconia', 'Middle Franconia', 
+                 'Swabia', 'Upper Bavaria', 'Upper Franconia',
+                 'Upper Palatinate']
 			 
 # List of water-level measuring points
 measuring_points = ['AkenW15', 'BorgsdorfW15', 'BurowW15', 'DetzemW15', 'DresdenW15', 'DreyeW60', 'FrankfurtW15', 
@@ -169,3 +205,65 @@ tumred = '#c4071b'
 tumbrightyellow = '#ffdc00'
 tumsenf = '#CAAB29'
 tumbrown = '#804704'
+
+color_states ={
+    'Baden-Württemberg': tumgreen,
+    'Bavaria': tumblue,
+    'Berlin': tumdarkerblue,
+    'Brandenburg': tumdarkblue,
+    'Bremen': tumlightblue,
+    'Hamburg': tumlighterblue,
+    'Hesse': tumorange,
+    'Mecklenburg-Vorpommern': tumivory,
+    'Lower Saxony': tumblack,
+    'North Rhine-Westphalia': tumgrey,
+    'Offshore': tumsenf,
+    'Rhineland-Palatinate': tumlightgrey,
+    'Saarland': tumviolet,
+    'Saxony': tumturquois,
+    'Saxony-Anhalt': tumdarkgreen,
+    'Schleswig-Holstein': tumred,
+    'Thuringia': tumbrightyellow
+}
+
+color_fuels = {
+               'Storage In': tumdarkblue,
+               'Storage Out': tumdarkblue,
+               'Biomass': tumgreen,
+               'Gas': tumivory,
+               'Geothermal': tumviolet,
+               'Hard coal': tumgrey,
+               'Hydro': tumblue,
+               'Lignite': tumbrown,
+               'Nuclear': tumred,
+               'Oil': tumblack,
+               'Other': tumbrightyellow,
+               'Solar': tumorange, 
+               'Waste': tumturquois,
+               'Wind': tumlightblue,
+               'Import': tumlighterblue,
+               'Export': tumlightgrey
+}
+
+months = {
+    0:    'January',
+    745:  'February',
+    1417: 'March',
+    2171: 'April',
+    2881: 'May',
+    3625: 'June',
+    4245: 'July',
+    5089: 'August',
+    5833: 'September',
+    6553: 'October',
+    7297: 'November',
+    8017: 'December'
+}
+
+
+
+scenario_names = {
+    'scenario_base': 'Base',
+    'scenario_ls': 'Large storage',
+    'scenario_ls_exp': 'Storage expansion'
+}
