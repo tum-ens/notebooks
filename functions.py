@@ -146,6 +146,66 @@ def concatination(variable, rc, scenario, realization, iteration, subproblems, r
     series = pd.concat(concat_list).sort_index()
     return series
 
+def concatination_wo_iteration(variable, rc, scenario, realization, subproblems, rc_master=None, com='Elec'):
+    """
+    Concatinate variable values over iterations
+    
+    Args:
+        variable: string to state extracted variable
+        rc: dictionary of result container
+        scenario: current scenario
+        realization: current uncertaint realization
+        subproblems: list of subproblem numbers
+        rc_master: dictionary of master result containers
+        com: string to define to extract commodity (default: Elec)
+    
+    Return:
+        Concatenated pandas series
+    """
+    
+    if variable == 'e_pro_out':
+        concat_list = [rc[scenario, sub, realization]._result[variable].xs(com,level='com').unstack().unstack()
+                         for sub in subproblems]
+        if rc_master:
+            concat_list = [rc_master[scenario]._result[variable].xs(com,
+                                                                     level='com').unstack().unstack()] + concat_list
+    elif 'sto' in variable:
+        if 'con' in variable:
+            concat_list = [rc[scenario, sub, realization]._result[variable].xs(com,level='com').xs('Pumped storage',
+                                                                                    level='sto').unstack()[1:]
+                             for sub in subproblems]
+            if rc_master:
+                concat_list = [rc_master[scenario]._result[variable].xs(com,
+                                                                         level='com').xs('Pumped storage',
+                                                                                         level='sto').unstack()[1:]] + concat_list
+        else:
+            concat_list = [rc[scenario, sub, realization]._result[variable].xs(com,level='com').xs('Pumped storage',
+                                                                                    level='sto').unstack()
+                             for sub in subproblems]
+            if rc_master:
+                concat_list = [rc_master[scenario]._result[variable].xs(com,
+                                                                         level='com').xs('Pumped storage',
+                                                                                         level='sto').unstack()] + concat_list
+    elif 'tra' in variable:
+        if 'in' in variable:
+            lvl = 'sit_'
+        elif 'out' in variable:
+            lvl = 'sit'
+        
+        
+        if rc_master:
+            concat_list = [rc[scenario, sub, realization]._result[variable].xs('Elec',
+                                                           level='com').xs('hvac',
+                                                                           level='tra').unstack(level=lvl).sum(axis=1).unstack()
+                             for sub in subproblems]
+            if rc_master:
+                concat_list = [rc_master[scenario]._result[variable].xs('Elec',
+                                                           level='com').xs('hvac',
+                                                                           level='tra').unstack(level=lvl).sum(axis=1).unstack()]+ concat_list
+
+    series = pd.concat(concat_list).sort_index()
+    return series
+
 def set_date_index(df, origin):
     """
     Change index of dataframe to datetime index
@@ -221,6 +281,26 @@ def summarize_plants(help_df):
     
     return help_df
 
+
+def summarize_caps(help_df):
+    # Try to store gas plants in one row and delete original rows
+    #import pdb; pdb.set_trace()
+    help_df = help_df.T
+    help_df['Gas plant'] = help_df['CC plant'] + help_df['Natural gas plant']
+    help_df = help_df
+    help_df.drop(['CC plant', 'Natural gas plant'], axis=1, inplace=True)  
+
+    # Try to delete curtailment and slack rows, if zero
+    try: 
+        #if help_df['Slack powerplant'].sum().sum() == 0:
+        help_df.drop(['Slack powerplant'], axis=1, inplace=True)
+        #if help_df['Curtailment'].sum().sum() == 0:
+        help_df.drop(['Curtailment'], axis=1, inplace=True)
+    except:
+        pass
+    
+    return help_df.T
+
 def extract_season(df, season, year='2015'):
     """ Slice dataframe according to season months
 
@@ -244,5 +324,7 @@ def extract_season(df, season, year='2015'):
         mask = ((df.index <= year+'-'+str(seasons[season][1]))
                 | (df.index >= year+'-'+str(seasons[season][2])))
         help_df = df[mask]
+    else:
+        print(f'{season} is not defined!')
     
     return help_df

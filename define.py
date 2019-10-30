@@ -15,6 +15,20 @@ states_translation_de_en = {
     'Sachsen': 'Saxony',
     'Sachsen-Anhalt': 'Saxony-Anhalt',
     'Thüringen': 'Thuringia'}
+    
+# Dict to translate regions to English
+regions_translation_de_en = {
+    'Bayern': 'Bavaria',
+    'Hessen': 'Hesse',
+    'Thüringen': 'Thuringia',
+    'Mittelfranken': 'Middle Franconia',
+    'Niederbayern': 'Lower Bavaria',
+    'Oberbayern': 'Upper Bavaria',
+    'Oberfranken': 'Upper Franconia',
+    'Oberpfalz': 'Upper Palatinate',
+    'Schwaben': 'Swabia',
+    'Unterfranken': 'Lower Franconia'
+    }
 
 # Dict to translate state names to German    
 states_translation_en_de = {y:x for x,y in states_translation_de_en.items()}
@@ -125,7 +139,14 @@ cap_positions_en = {
     'Saxony-Anhalt': [0.53, 0.58, 0.15, 0.15],
     'Schleswig-Holstein': [0.4, 0.83, 0.15, 0.15],
     'Thuringia': [0.47, 0.44, 0.15, 0.15],
-    'Offshore': [0.5, 0.92, 0.15, 0.15]
+    'Offshore': [0.5, 0.92, 0.15, 0.15],
+    'Lower Bavaria': [0.675, 0.352, 0.15, 0.15],
+    'Lower Franconia': [0.2, 0.7, 0.15, 0.15],
+    'Middle Franconia': [0.32, 0.52, 0.15,0.15],
+    'Swabia': [0.255, 0.2, 0.15, 0.15],
+    'Upper Bavaria': [0.48, 0.19, 0.15, 0.15],
+    'Upper Palatinate': [0.52, 0.52, 0.15, 0.15],
+    'Upper Franconia': [0.4, 0.7, 0.15, 0.15]
 }
 
 	
@@ -174,6 +195,10 @@ states_en = ['Baden-Württemberg', 'Bavaria', 'Berlin', 'Brandenburg',
 regions_by_en = ['Lower Bavaria', 'Lower Franconia', 'Middle Franconia', 
                  'Swabia', 'Upper Bavaria', 'Upper Franconia',
                  'Upper Palatinate']
+                 
+#List of regions of Bavaria in German
+regions_by_de = ['Oberbayern', 'Niederbayern', 'Oberpfalz', 'Oberfranken',
+				 'Mittelfranken', 'Unterfranken', 'Schwaben']
 			 
 # List of water-level measuring points
 measuring_points = ['AkenW15', 'BorgsdorfW15', 'BurowW15', 'DetzemW15', 'DresdenW15', 'DreyeW60', 'FrankfurtW15', 
@@ -243,6 +268,21 @@ color_fuels = {
                'Wind': tumlightblue,
                'Import': tumlighterblue,
                'Export': tumlightgrey
+}
+
+translate_fuel = {
+    'Biomass plant': 'Biomass',
+    'Gas plant': 'Gas',
+    'Geothermal plant': 'Geothermal',
+    'Hard coal plant': 'Hard coal',
+    'Hydro plant': 'Hydro',
+    'Lignite plant': 'Lignite',
+    'Nuclear plant': 'Nuclear',
+    'Oil plant': 'Oil',
+    'Other plant': 'Other',
+    'Solar plant': 'Solar',
+    'Waste plant': 'Waste',
+    'Wind plant': 'Wind'
 }
 
 months = {
